@@ -14,6 +14,13 @@ double dropDownHeight = 50.0;
 double dropDownWidth = 100.0;
 var sendBitcoinType = 'BTC';
 var getBitcoinType = 'DGB';
+var sendCryptoValue = "0.1";
+var gotCryptoValue = "43223.3824";
+
+var textOne = 'Minimum: 0.0006, Maximum: 0.60231';
+var textTwo = 'Estimated Fees: 0';
+var textThree = 'Exchange Rate: 432,233.82374';
+var textFour = 'Estimated Arrival: 10-60 Minutes';
 
 class MyApp extends StatelessWidget {
   @override
@@ -54,7 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
           height: SizeConfig.blockSizeVertical * 100,
           color: CupertinoColors.black,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Container(
                 width: SizeConfig.blockSizeHorizontal * 100,
@@ -69,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: SizeConfig.blockSizeVertical * 10,
                       margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       decoration: BoxDecoration(
-                          border: Border.all(color: CupertinoColors.systemRed),
+                          border: Border.all(color: CupertinoColors.white),
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                           color: CupertinoColors.white),
                       child: Row(
@@ -98,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 0, 5),
                                     child: Text(
-                                      '0.1',
+                                      sendCryptoValue,
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.black),
                                     ),
@@ -151,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: SizeConfig.blockSizeHorizontal * 100,
                       height: SizeConfig.blockSizeVertical * 10,
                       decoration: BoxDecoration(
-                          border: Border.all(color: CupertinoColors.systemRed),
+                          border: Border.all(color: CupertinoColors.white),
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                           color: CupertinoColors.white),
                       child: Row(
@@ -180,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 0, 5),
                                     child: Text(
-                                      '43223.3824',
+                                      gotCryptoValue,
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.black),
                                     ),
@@ -230,7 +238,59 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(10, 30, 10, 10),
+                  width: SizeConfig.blockSizeHorizontal * 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          textOne,
+                          style: TextStyle(color: CupertinoColors.white),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          textTwo,
+                          style: TextStyle(color: CupertinoColors.white),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          textThree,
+                          style: TextStyle(color: CupertinoColors.white),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          textFour,
+                          style: TextStyle(color: CupertinoColors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: SizeConfig.blockSizeHorizontal * 100,
+                  height: SizeConfig.blockSizeVertical * 10,
+                  color: buttonColor,
+                  child: Center(
+                    child: exchangeButtonWidget(),
+                  ),
+                ),
+              ),
             ],
           )),
       drawer: Drawer(
