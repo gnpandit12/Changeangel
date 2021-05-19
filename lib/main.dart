@@ -10,6 +10,10 @@ var appBarTitle = "changeangel";
 var buttonColor = new Color(0xff32D278);
 var appBarBackgroundImage = 'assets/CA_White_Logo.png';
 var drawerHeaderBackgroundImage = 'assets/CA_Color_Banner.png';
+double dropDownHeight = 50.0;
+double dropDownWidth = 100.0;
+var sendBitcoinType = 'BTC';
+var getBitcoinType = 'DGB';
 
 class MyApp extends StatelessWidget {
   @override
@@ -46,20 +50,189 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Container(
-        width: SizeConfig.blockSizeHorizontal * 100,
-        height: SizeConfig.blockSizeVertical * 100,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            width: SizeConfig.blockSizeHorizontal * 100,
-            height: SizeConfig.blockSizeVertical * 10,
-            color: buttonColor,
-            child: Center(
-              child: exchangeButtonWidget(),
-            ),
-          ),
-        ),
-      ),
+          width: SizeConfig.blockSizeHorizontal * 100,
+          height: SizeConfig.blockSizeVertical * 100,
+          color: CupertinoColors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: SizeConfig.blockSizeHorizontal * 100,
+                height: SizeConfig.blockSizeVertical * 22,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // Sent Bitcoin Container...
+                    Container(
+                      width: SizeConfig.blockSizeHorizontal * 100,
+                      height: SizeConfig.blockSizeVertical * 10,
+                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: CupertinoColors.systemRed),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          color: CupertinoColors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 5, 0, 0),
+                                    child: Text(
+                                      'You Send',
+                                      style: TextStyle(
+                                          color: Colors.greenAccent,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 0, 0, 5),
+                                    child: Text(
+                                      '0.1',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            flex: 1,
+                          ),
+                          // DropDown Bitcoin Widget
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: SizedBox(
+                                width: dropDownWidth,
+                                height: dropDownHeight,
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  hint: Text(
+                                    'Select Bitcoin',
+                                    style: TextStyle(
+                                        color: CupertinoColors.black,
+                                        fontSize: 14),
+                                  ),
+                                  value: sendBitcoinType,
+                                  items: <String>['BTC', 'DGB']
+                                      .map((String value) {
+                                    return new DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (newBitcoin) {
+                                    print("Send Bitcoin: $sendBitcoinType");
+                                    print("New Bitcoin: $newBitcoin");
+                                    setState(() {
+                                      sendBitcoinType = newBitcoin;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            flex: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Bitcoin Got Container...
+                    Container(
+                      width: SizeConfig.blockSizeHorizontal * 100,
+                      height: SizeConfig.blockSizeVertical * 10,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: CupertinoColors.systemRed),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          color: CupertinoColors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 5, 0, 0),
+                                    child: Text(
+                                      'You Get',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.greenAccent),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 0, 0, 5),
+                                    child: Text(
+                                      '43223.3824',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            flex: 1,
+                          ),
+                          // DropDown Bitcoin Widget
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: SizedBox(
+                                width: dropDownWidth,
+                                height: dropDownHeight,
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  hint: Text(
+                                    'Select Bitcoin',
+                                    style: TextStyle(
+                                        color: CupertinoColors.black,
+                                        fontSize: 14),
+                                  ),
+                                  value: getBitcoinType,
+                                  items: <String>['BTC', 'DGB']
+                                      .map((String value) {
+                                    return new DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (newBitcoin) {
+                                    print("Current Bitcoin: $getBitcoinType");
+                                    print("New Bitcoin: $newBitcoin");
+                                    setState(() {
+                                      getBitcoinType = newBitcoin;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            flex: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )),
       drawer: Drawer(
         child: Container(
           width: double.infinity,
